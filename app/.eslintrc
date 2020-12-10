@@ -1,0 +1,59 @@
+{
+    "parser": "babel-eslint",
+    "extends": ["airbnb", "prettier", "prettier/react"],
+    "plugins": [
+      "react",
+      "jsx-a11y",
+      "import",
+      "eslint-plugin-prettier",
+      "eslint-plugin-react"
+    ],
+    "globals": {
+        "localStorage": false,
+        "File": false,
+        "document": false,
+        "window": false
+    },
+    "rules": {
+      "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+      "no-unused-expressions": "off",
+      'react/jsx-props-no-spreading': ['off'],
+      "import/prefer-default-export": "off",
+      "max-classes-per-file": ["error", 2],
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "react/prefer-stateless-function": [0],
+      "react/jsx-indent": [0],
+      "no-nested-ternary": "off",
+      "react/sort-comp": [0],
+      "react/destructuring-assignment": [0],
+      "react/forbid-prop-types": [0],
+      "react/prop-types": [0],
+      "react/jsx-no-bind" : [0],
+      "class-methods-use-this": [0],
+      "react/no-unescaped-entities": ["error", { "forbid": [">", "}"] }],
+      "quotes": [
+        "error",
+        "single",
+        { "avoidEscape": true, "allowTemplateLiterals": false }
+      ],
+      "jsx-quotes": ["error", "prefer-double"],
+      "camelcase": "off",
+      "no-use-before-define": "off",
+      "semi": ["error", "always"],
+      "prettier/prettier": [
+        "error",
+        {
+          "trailingComma": "none",
+          "singleQuote": true,
+          "jsxSingleQuote": false,
+          "printWidth": 110,
+          "semi": true,
+          "jsxBracketSameLine": true
+        }
+      ]
+    },
+    "env": {
+      "jest": true,
+      "es6": true
+    }
+  }
