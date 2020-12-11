@@ -157,12 +157,14 @@ class UpdateList extends Component{
              value={this.state.desc}
              onChangeText = { ( text ) => { this.setState({ desc: text })} }
        />
+<View style={styles.row}>
        <TouchableOpacity onPress={this.updateRegisto} activeOpacity={0.7} style={styles.button} >
           <Text style={styles.buttonStyle}> UPDATE </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.deleteRegisto} activeOpacity={0.7} style={styles.button} >
-           <Text style={styles.buttonStyle}> REMOVE </Text>
+        <TouchableOpacity onPress={this.deleteRegisto} activeOpacity={0.7} style={styles.buttonRed} >
+           <Text style={styles.buttonStyleRed}> REMOVE </Text>
          </TouchableOpacity>
+</View>
      </View>
    );
  }
@@ -179,11 +181,31 @@ class UpdateList extends Component{
        backgroundColor: '#4CAF50',
        borderRadius:2,
        margin: 5,
-       marginLeft: '30%'
+       position: 'relative',
+   },
+     row: {
+         flexDirection: 'row',
+         alignItems: 'center',
+         justifyContent: 'center',
+         margin: 1
+     
+ },
+   buttonRed: {
+       height: 40,
+       padding: 10,
+       position: 'relative',
+       width: '40%',
+       backgroundColor: 'red',
+       borderRadius:2,
    },
    buttonStyle: {
        fontSize: 16,
        textAlign: 'center',
+   },
+   buttonStyleRed: {
+       fontSize: 16,
+       textAlign: 'center',
+       backgroundColor: 'red',
    },
    TextInputStyle:
    {

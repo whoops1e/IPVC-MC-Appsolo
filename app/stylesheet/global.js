@@ -14,12 +14,17 @@ export const styles = StyleSheet.create({
     flex: 3,
   },
   center: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   half3: {
     flex: 1,
     justifyContent: 'flex-end',
     margin: 30,
+  },
+    screenContainer: {
+    flex: 0.5,
+    justifyContent: "center",
+    padding: 0
   },
   buttonview: {
     flex: 1,
@@ -44,13 +49,21 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 5
   },
+  homeButtonsMain: {
+      flexDirection:'row',
+      marginLeft: 25,
+      marginRight: 25,
+      marginTop: 50,
+      marginBottom: 300
+  },
    button: {
        padding: 6,
        position: 'relative',
        backgroundColor: '#4CAF50',
        borderRadius: 7,
        marginTop: 15,
-       width: '70%',
+       marginRight:5,
+       width: '50%'
    },
    button_orange: {
      backgroundColor: '#ffa500',

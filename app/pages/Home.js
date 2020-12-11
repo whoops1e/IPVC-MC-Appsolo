@@ -20,13 +20,17 @@ function Home({
 
   return (
     <>
-      <View style={{ backgroundColor: '#e8f1f5', paddingTop: '50%', justifyContent: 'center', paddingBottom: '100%' }}>
+      <View style={{ backgroundColor: '#e8f1f5', paddingTop: '50%', justifyContent: 'center', }}>
         <Text style={styles.textstyle}>{translations.DAY(user.email)}</Text>
-        <View style={[styles.Buttons, styles.center]}>
-          <Button title={translations.NOTESB} onPress={() => navigation.navigate('Notes_list')} />
-          <Button title={translations.MAPB} onPress={() => navigation.navigate('Map', { user })} />
-          <Button type="red" title={translations.LOGOUTB} onPress={handleSignOut} />
+        <View style={[ styles.center, styles.homeButtonsMain ]}>
+              <Button title={translations.NOTESB} onPress={() => navigation.navigate('Notes_list')} />
+              <Button title={translations.MAPB} onPress={() => navigation.navigate('Map', { user })} />
         </View>
+
+        <View style={[ styles.center ]}>
+            <Button type="red" title={translations.LOGOUTB} onPress={handleSignOut} />
+        </View>
+
       </View>
     </>
   );
