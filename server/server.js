@@ -11,7 +11,7 @@ app.use(express.json());
 
 const Markers = require('./dbMarkers.js');
 
-mongoose.connect('mongodb+srv://admin:admin@cluster0.widxt.mongodb.net/awesome?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://admin:Jh5OTDUslZOZ1naF@cluster0.9ooj4.mongodb.net/markers?retryWrites=true&w=majority', {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true

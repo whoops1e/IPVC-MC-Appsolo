@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, Alert } from 'reac
 
 import Realm from 'realm';
 
+
+
 let realm;
 
 class Notes extends Component {
@@ -11,46 +13,54 @@ class Notes extends Component {
     this.state = {
       name: '',
       city: '',
-      phone: ''
+      phone: '',
+      desc: ''
     };
 
     realm = new Realm({
-      path: 'persons.realm',
+      path: 'personsNEW.realm',
       schema: [
         {
-          name: 'person',
+          name: 'personNEW',
           properties: {
             id: { type: 'int', default: 0 },
             name: 'string',
             city: 'string',
-            phone: 'string'
+            phone: 'string',
+            desc: 'string'
           }
         }
       ]
     });
   }
 
-  show_count = () => {
+    
+ /*
+    show_count = () => {
     const ID = realm.objects('person').length;
     Alert.alert(`count: ${ID}`);
   };
-
-  addRegisto = () => {
+*/
+    
+  addNewNote = () => {
     realm.write(() => {
-      const ID = realm.objects('person').length + 1;
-      realm.create('person', {
+      const ID = realm.objects('personNEW').length + 1;
+      realm.create('personNEW', {
         id: ID,
         name: this.state.name,
         city: this.state.city,
-        phone: this.state.phone
+        phone: this.state.phone,
+        desc: this.state.desc
       });
     });
-    Alert.alert('Successfully inserted');
+    Alert.alert('Successfully added!');
   };
 
   GoToList = () => {
     this.props.navigation.navigate('Notes_list');
   };
+
+
 
   render() {
     return (
@@ -86,12 +96,20 @@ class Notes extends Component {
               this.setState({ phone: text });
             }}
           />
+          <TextInput
+            placeholder="Description"
+            style={styles.TextInputStyle}
+            underlineColorAndroid="transparent"
+            onChangeText={(text) => {
+              this.setState({ desc: text });
+            }}
+          />
           <View style={styles.Buttons}>
-            <TouchableOpacity onPress={this.NOTE} activeOpacity={0.7} style={styles.button}>
-              <Text style={styles.TextStyle}> ADD </Text>
+            <TouchableOpacity onPress={this.addNewNote} activeOpacity={0.7} style={styles.button}>
+              <Text style={styles.TextStyle}> Add new note </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.GoToList} activeOpacity={0.7} style={styles.button}>
-              <Text style={styles.TextStyle}> BACK </Text>
+              <Text style={styles.TextStyle}> Go back</Text>
             </TouchableOpacity>
           </View>
         </View>

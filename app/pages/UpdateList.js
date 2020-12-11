@@ -17,9 +17,10 @@ class UpdateList extends Component{
       name : this.props.route.params.name,
       city : this.props.route.params.city,
       phone : this.props.route.params.phone,
+      desc : this.props.route.params.desc,
       id: this.props.route.params.id,
     }
-    realm = new Realm({ path: 'persons.realm' });
+    realm = new Realm({ path: 'personsNEW.realm' });
   }
 
   updateRegisto=()=>{
@@ -27,14 +28,16 @@ class UpdateList extends Component{
     if (this.state.name) {
       if (this.state.city) {
         if (this.state.phone) {
+            if (this.state.desc) {
           realm.write(() => {
             var obj = realm
-              .objects('person')
+              .objects('personNEW')
               .filtered('id =' + this.state.id);
             if (obj.length > 0) {
-              obj[0].name = this.state.name;
-              obj[0].city = this.state.city;
-              obj[0].phone = this.state.phone;
+              obj[0].name   =     this.state.name;
+              obj[0].city   =     this.state.city;
+              obj[0].phone  =     this.state.phone;
+              obj[0].desc   =     this.state.desc;
               Alert.alert(
                 'Info',
                 'Successfully updated',
@@ -51,6 +54,9 @@ class UpdateList extends Component{
               alert('Update failed');
             }
           });
+          } else {
+            alert('Insert desciption');
+            }
         } else {
           alert('Insert phone');
         }
@@ -60,6 +66,7 @@ class UpdateList extends Component{
     } else {
       alert('Insert name');
     }
+    
   }
 
   deleteRegisto=()=>{
@@ -67,8 +74,8 @@ class UpdateList extends Component{
       'Info',
       'Are you sure you want to remove this record?',
     [
-      {text: 'No', onPress: () => console.log('Canceled'), style: 'cancel'},
-      {text: 'Yes', onPress: () => {this.deleteUser();}},
+      {text: 'No', onPress:     () => console.log('Canceled'), style: 'cancel'},
+      {text: 'Yes', onPress:    () => {this.deleteUser();}},
     ]
     );
   }
@@ -76,23 +83,26 @@ class UpdateList extends Component{
   deleteUser = () => {
     realm.write(() => {
       //const { id } = this.props.route.params;
-      let task = realm.objects('person').filtered('id = ' + this.state.id);
+      let task = realm.objects('personNEW').filtered('id = ' + this.state.id);
       realm.delete(task);
     });
     this.props.navigation.goBack();
   }
 
   searchUser = () => {
-      var person = realm.objects('person').filtered('id ='+this.state.id);
-      if (person.length > 0) {
+      var personNEW = realm.objects('personNEW').filtered('id ='+this.state.id);
+      if (personNEW.length > 0) {
         this.setState({
-          name: person[0].name,
+          name: personNEW[0].name,
         });
         this.setState({
-          city: person[0].city,
+          city: personNEW[0].city,
         });
         this.setState({
-          phone: person[0].phone,
+          phone: personNEW[0].phone,
+        });
+        this.setState({
+          desc: personNEW[0].desc,
         });
       } else {
         alert('User does not exist');
@@ -105,6 +115,9 @@ class UpdateList extends Component{
         this.setState({
           phone: '',
         });
+        this.setState({
+          desc: '',
+        });
       }
     };
 
@@ -112,10 +125,7 @@ class UpdateList extends Component{
 
    return (
      <View style={styles.MainContainer}>
-       <TextInput>{this.state.id}</TextInput>
-       <TouchableOpacity onPress={this.searchUser} activeOpacity={0.7} style={styles.button} >
-          <Text style={styles.TextStyle}> Obtain data </Text>
-        </TouchableOpacity>
+      <Text style={{ paddingLeft: 10, paddingTop:20 }}>Name: </Text>
       <TextInput
              placeholder="Insert name"
              style = { styles.TextInputStyle }
@@ -123,6 +133,7 @@ class UpdateList extends Component{
              value={this.state.name}
              onChangeText = { ( text ) => { this.setState({ name: text })} }
        />
+<Text style={{ paddingLeft: 10 }}>City: </Text>
        <TextInput
              placeholder="Insert city"
              style = { styles.TextInputStyle }
@@ -130,6 +141,7 @@ class UpdateList extends Component{
              value={this.state.city}
              onChangeText = { ( text ) => { this.setState({ city: text })} }
        />
+<Text style={{ paddingLeft: 10 }}>Phone: </Text>
        <TextInput
              placeholder="Insert phone"
              style = { styles.TextInputStyle }
@@ -137,11 +149,19 @@ class UpdateList extends Component{
              value={this.state.phone}
              onChangeText = { ( text ) => { this.setState({ phone: text })} }
        />
+<Text style={{ paddingLeft: 10 }}>Description: </Text>
+       <TextInput
+             placeholder="Insert description"
+             style = { styles.TextInputStyle }
+             underlineColorAndroid = "transparent"
+             value={this.state.desc}
+             onChangeText = { ( text ) => { this.setState({ desc: text })} }
+       />
        <TouchableOpacity onPress={this.updateRegisto} activeOpacity={0.7} style={styles.button} >
-          <Text style={styles.TextStyle}> UPDATE </Text>
+          <Text style={styles.buttonStyle}> UPDATE </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.deleteRegisto} activeOpacity={0.7} style={styles.button} >
-           <Text style={styles.TextStyle}> REMOVE </Text>
+           <Text style={styles.buttonStyle}> REMOVE </Text>
          </TouchableOpacity>
      </View>
    );
@@ -150,14 +170,20 @@ class UpdateList extends Component{
 
  const styles = StyleSheet.create({
    MainContainer: {
-     flex: 1,
+     flex: 1
    },
    button: {
        height: 40,
        padding: 10,
+       width: '40%',
        backgroundColor: '#4CAF50',
-       borderRadius:7,
-       margin: 12
+       borderRadius:2,
+       margin: 5,
+       marginLeft: '30%'
+   },
+   buttonStyle: {
+       fontSize: 16,
+       textAlign: 'center',
    },
    TextInputStyle:
    {
@@ -165,7 +191,7 @@ class UpdateList extends Component{
        margin: 10,
        borderColor: '#009688',
        height: 40,
-       borderRadius: 10,
+       borderRadius: 5,
        marginBottom: 10,
        textAlign: 'center',
    },

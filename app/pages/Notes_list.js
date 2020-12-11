@@ -24,10 +24,10 @@ let realm;
 class Notes_list extends Component {
   constructor(props) {
     super(props);
-    realm = new Realm({ path: 'persons.realm' });
-    const persons = realm.objects('person');
+    realm = new Realm({ path: 'personsNEW.realm' });
+    const personsNEW = realm.objects('personNEW');
     this.state = {
-      FlatListItems: persons
+      FlatListItems: personsNEW
     };
     realm.addListener('change', () => {
       this.reloadData();
@@ -35,7 +35,7 @@ class Notes_list extends Component {
   }
 
   reloadData = () => {
-    this.setState({ FlatListItems: realm.objects('person') });
+    this.setState({ FlatListItems: realm.objects('personNEW') });
   };
 
   ListViewItemSeparator = () => {
@@ -81,6 +81,7 @@ class Notes_list extends Component {
                   <Text style={styles.beautifulText}>Name: {item.name}</Text>
                   <Text>City: {item.city}</Text>
                   <Text>Phone: {item.phone}</Text>
+                  <Text>Description: {item.desc}</Text>
                 </View>
               </View>
 

@@ -82,6 +82,7 @@ export const styles = StyleSheet.create({
    buttonLoadingText: {
      color: 'transparent'
    },
+    
    buttonLoading: {
      position: 'absolute',
      top: 0,

@@ -22,9 +22,9 @@ function StackLogin() {
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         <Stack.Screen name="Map" component={Map} options={{ headerShown: true }} />
-        <Stack.Screen name="Notes" component={Notes} options={{ headerShown: true }} />
+        <Stack.Screen name="Notes" component={Notes} options={{ headerShown: false }} />
         <Stack.Screen name="Notes_list" component={Notes_list} options={{ headerShown: false }}  />
-        <Stack.Screen name="UpdateList" component={UpdateList} />
+        <Stack.Screen name="UpdateList" component={UpdateList} options={{ headerShown: true }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
